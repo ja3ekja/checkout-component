@@ -1,7 +1,7 @@
 package com.pragmaticcoders.checkoutcomponent.services;
 
 import com.pragmaticcoders.checkoutcomponent.model.Item;
-import com.pragmaticcoders.checkoutcomponent.repositories.MockRepository;
+import com.pragmaticcoders.checkoutcomponent.repositories.ItemRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,13 +22,13 @@ public class ItemsServiceTest {
     @InjectMocks
     private ItemsService itemsService;
     @Mock
-    private MockRepository mockRepository;
+    private ItemRepository itemRepository;
 
     @Test
     public void getItemTest() {
         //Given
         Item item1 = new Item(1L, "RAM memory", new BigDecimal(100.00), 20);
-        when(mockRepository.getItem(1L)).thenReturn(item1);
+        when(itemRepository.getItem(1L)).thenReturn(item1);
         //When
         Item item = itemsService.getItem(1L);
         //Then
@@ -38,7 +38,7 @@ public class ItemsServiceTest {
     @Test
     public void getPriceTest() {
         //Given
-        when(mockRepository.getPrice(2L)).thenReturn(new BigDecimal(200.00));
+        when(itemRepository.getPrice(2L)).thenReturn(new BigDecimal(200.00));
         //When
         BigDecimal price = itemsService.getPrice(2L);
         //Then
@@ -48,7 +48,7 @@ public class ItemsServiceTest {
     @Test
     public void getQuantity() {
         //Given
-        when(mockRepository.getQuantity(3L)).thenReturn(50);
+        when(itemRepository.getQuantity(3L)).thenReturn(50);
         //When
         int quantity = itemsService.getQuantity(3L);
         //Then
