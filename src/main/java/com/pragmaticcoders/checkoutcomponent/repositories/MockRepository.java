@@ -12,7 +12,9 @@ public class MockRepository {
 
     private static Map<Long, Item> mockRepository;
 
-    public static void setup() {
+    {MockRepository.setup();}
+
+    private static void setup() {
         Item item1 = new Item(1L, "RAM memory", new BigDecimal(100.00), 20);
         Item item2 = new Item(2L, "Hard drive", new BigDecimal(200.00), 300);
         Item item3 = new Item(3L, "Processor", new BigDecimal(70.00), 50);

@@ -2,20 +2,21 @@ package com.pragmaticcoders.checkoutcomponent.services;
 
 import com.pragmaticcoders.checkoutcomponent.model.Item;
 import com.pragmaticcoders.checkoutcomponent.repositories.MockRepository;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class ItemsServiceTest {
 
     @InjectMocks
@@ -53,5 +54,4 @@ public class ItemsServiceTest {
         //Then
         assertThat(quantity, is(50));
     }
-
 }

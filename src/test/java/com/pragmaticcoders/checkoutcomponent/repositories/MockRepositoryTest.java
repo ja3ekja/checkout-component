@@ -1,27 +1,23 @@
 package com.pragmaticcoders.checkoutcomponent.repositories;
 
 import com.pragmaticcoders.checkoutcomponent.model.Item;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class MockRepositoryTest {
 
     @InjectMocks
     private MockRepository mockRepository;
-
-    @Before
-    public void setUp() {
-        MockRepository.setup();
-    }
 
     @Test
     public void getItemTest() {
