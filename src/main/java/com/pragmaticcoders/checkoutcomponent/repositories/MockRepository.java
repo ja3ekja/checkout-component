@@ -1,6 +1,9 @@
 package com.pragmaticcoders.checkoutcomponent.repositories;
 
+import com.pragmaticcoders.checkoutcomponent.controllers.BucketScanner;
 import com.pragmaticcoders.checkoutcomponent.model.Item;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -9,6 +12,8 @@ import java.util.Map;
 
 @Repository()
 public class MockRepository {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MockRepository.class);
 
     private static Map<Long, Item> mockRepository;
 
@@ -25,14 +30,17 @@ public class MockRepository {
     }
 
     public Item getItem(long id) {
+        LOGGER.debug("Fetch item with id: %s", id);
         return mockRepository.get(id);
     }
 
     public BigDecimal getPrice(long id) {
+        LOGGER.debug("Fetch price of item with id: %s", id);
         return mockRepository.get(id).getPrice();
     }
 
     public int getQuantity(long id) {
+        LOGGER.debug("Fetch quantity of item with id: %s", id);
         return mockRepository.get(id).getQuantity();
     }
 }
