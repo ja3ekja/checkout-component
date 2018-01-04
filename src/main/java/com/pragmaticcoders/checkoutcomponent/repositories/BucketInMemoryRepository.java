@@ -23,7 +23,7 @@ public class BucketInMemoryRepository {
         bucketRepository = new ArrayList<>();
     }
 
-    public Collection<Item> getItems() {
+    public List<Item> getItems() {
         return bucketRepository;
     }
 

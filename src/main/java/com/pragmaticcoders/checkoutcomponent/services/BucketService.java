@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Collection;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -27,7 +27,7 @@ public class BucketService {
         return getTotalAmount();
     }
 
-    public Collection<Item> getItems() {
+    public List<Item> getItems() {
         return bucketRepository.getItems();
     }
 
@@ -35,7 +35,7 @@ public class BucketService {
         return bucketRepository.getTotalAmount();
     }
 
-    public Item getItemFromItemRepository(Long itemId){
+    public Item getItemFromItemRepository(Long itemId) {
         return itemRepository.getItem(itemId);
     }
 }

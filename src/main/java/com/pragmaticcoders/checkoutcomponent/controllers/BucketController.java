@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
-import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -30,7 +30,7 @@ public class BucketController {
     }
 
     @RequestMapping(value = "/check", method = RequestMethod.GET)
-    public Collection<Item> checkBucket() {
+    public List<Item> checkBucket() {
         LOGGER.debug("List items from bucket");
         return bucketService.getItems();
     }
