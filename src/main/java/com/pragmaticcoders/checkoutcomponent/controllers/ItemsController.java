@@ -16,9 +16,9 @@ import java.math.BigDecimal;
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping("/checkout")
-public class ItemsScanner {
+public class ItemsController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ItemsScanner.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemsController.class);
 
     private final ItemsService itemsService;
 

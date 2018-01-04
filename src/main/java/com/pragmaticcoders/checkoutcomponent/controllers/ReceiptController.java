@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@RequestMapping("/scan")
-public class BucketScanner {
+@RequestMapping("/receipt")
+public class ReceiptController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BucketScanner.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReceiptController.class);
 }
