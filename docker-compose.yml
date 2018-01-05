@@ -10,14 +10,11 @@ services:
       - "1433:1433"
 
   backend:
-    image: frekele/maven
-    entrypoint: /root/app
+    image: ja3ekja/maven
     command: mvn spring-boot:run
-    privileged: true
     volumes:
-      - "$HOME/.m2:/root/.m2"
       - "./:/usr/src/mymaven"
-      - "./:/root/app"
+      - "~/.m2:/usr/src/mymaven/.m2"
     ports:
       - "8080:8080"
     depends_on:
