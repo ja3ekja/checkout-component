@@ -1,0 +1,24 @@
+version: '3'
+services:
+  db:
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=RybaPila1!PiesJadl
+      - MSSQL_PID=Express
+    image: microsoft/mssql-server-linux:2017-latest
+    ports:
+      - "1433:1433"
+
+  backend:
+    image: frekele/maven
+    entrypoint: /root/app
+    command: mvn spring-boot:run
+    privileged: true
+    volumes:
+      - "$HOME/.m2:/root/.m2"
+      - "./:/usr/src/mymaven"
+      - "./:/root/app"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
