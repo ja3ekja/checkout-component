@@ -10,9 +10,7 @@ services:
       - "1433:1433"
 
   backend:
-    build:
-     context: ./docker
-     dockerfile: Dockerfile
+    image: ja3ekja/maven
     command: mvn spring-boot:run
     volumes:
       - "./:/usr/src/mymaven"
