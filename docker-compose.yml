@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=RybaPila1!PiesJadl
+      - MSSQL_PID=Express
+    image: microsoft/mssql-server-linux:2017-latest
+    ports:
+      - "1433:1433"
+
+  backend:
+    image: ja3ekja/maven
+    command: mvn spring-boot:run
+    volumes:
+      - "./:/usr/src/mymaven"
+      - "~/.m2:/usr/src/mymaven/.m2"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
