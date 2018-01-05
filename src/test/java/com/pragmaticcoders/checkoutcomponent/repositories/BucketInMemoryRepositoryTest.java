@@ -1,10 +1,8 @@
 package com.pragmaticcoders.checkoutcomponent.repositories;
 
 import com.pragmaticcoders.checkoutcomponent.model.Item;
-import org.hamcrest.number.BigDecimalCloseTo;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -55,7 +53,7 @@ public class BucketInMemoryRepositoryTest {
     @Test
     public void addItemTest() throws Exception {
         //Given
-        List<Item> twoItemsList= bucketList;
+        List<Item> twoItemsList = bucketList;
         twoItemsList.add(item1);
         //When
         bucketRepository.addItem(item1);
