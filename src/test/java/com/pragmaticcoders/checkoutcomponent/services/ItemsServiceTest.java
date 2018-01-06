@@ -1,7 +1,7 @@
 package com.pragmaticcoders.checkoutcomponent.services;
 
 import com.pragmaticcoders.checkoutcomponent.model.Item;
-import com.pragmaticcoders.checkoutcomponent.repositories.ItemRepository;
+import com.pragmaticcoders.checkoutcomponent.repositories.ItemInMemoryRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -22,13 +22,13 @@ public class ItemsServiceTest {
     @InjectMocks
     private ItemsService itemsService;
     @Mock
-    private ItemRepository itemRepository;
+    private ItemInMemoryRepository itemInMemoryRepository;
 
     @Test
     public void getItemTest() {
         //Given
-        Item item1 = new Item(1L, "RAM memory", new BigDecimal(100.00), 20);
-        when(itemRepository.getItem(1L)).thenReturn(item1);
+        Item item1 = new Item(1L, "RAM memory", new BigDecimal(100.00));
+        when(itemInMemoryRepository.getItem(1L)).thenReturn(item1);
         //When
         Item item = itemsService.getItem(1L);
         //Then
@@ -38,20 +38,10 @@ public class ItemsServiceTest {
     @Test
     public void getPriceTest() {
         //Given
-        when(itemRepository.getPrice(2L)).thenReturn(new BigDecimal(200.00));
+        when(itemInMemoryRepository.getPrice(2L)).thenReturn(new BigDecimal(200.00));
         //When
         BigDecimal price = itemsService.getPrice(2L);
         //Then
         assertThat(price, is(new BigDecimal(200.00)));
-    }
-
-    @Test
-    public void getQuantity() {
-        //Given
-        when(itemRepository.getQuantity(3L)).thenReturn(50);
-        //When
-        int quantity = itemsService.getQuantity(3L);
-        //Then
-        assertThat(quantity, is(50));
     }
 }

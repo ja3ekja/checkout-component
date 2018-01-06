@@ -33,11 +33,4 @@ public class ItemsController {
         LOGGER.debug("Get price of item with id: %s", itemId);
         return itemsService.getPrice(itemId);
     }
-
-    @RequestMapping(value = "/get-quantity/{itemId}", method = RequestMethod.GET)
-    public int getQuantity(@PathVariable Long itemId) {
-        LOGGER.debug("Get quantity of item with id: %s", itemId);
-        return itemsService.getQuantity(itemId);
-    }
-
 }

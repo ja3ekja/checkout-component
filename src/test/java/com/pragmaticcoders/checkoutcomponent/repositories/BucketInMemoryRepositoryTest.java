@@ -29,7 +29,7 @@ public class BucketInMemoryRepositoryTest {
 
     @Before
     public void setUp() {
-        item1 = new Item(1L, "RAM memory", new BigDecimal(100.00), 20);
+        item1 = new Item(1L, "RAM memory", new BigDecimal(100.00));
         bucketList = new ArrayList<>();
         bucketList.add(item1);
 
