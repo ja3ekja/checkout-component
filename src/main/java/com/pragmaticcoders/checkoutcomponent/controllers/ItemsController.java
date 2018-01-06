@@ -22,15 +22,16 @@ public class ItemsController {
 
     private final ItemsService itemsService;
 
-    @RequestMapping(value = "/get-item/{itemId}", method = RequestMethod.GET)
-    public Item getItem(@PathVariable Long itemId) {
-        LOGGER.debug("Get item with id: %s", itemId);
-        return itemsService.getItem(itemId);
+    @RequestMapping(value = "/get-item/{id}", method = RequestMethod.GET)
+    public Item getItem(@PathVariable Long id) {
+        LOGGER.debug("Get item with id: %s", id);
+        return itemsService.getItem(1L);
     }
 
-    @RequestMapping(value = "/get-price/{itemId}", method = RequestMethod.GET)
-    public BigDecimal getPrice(@PathVariable Long itemId) {
-        LOGGER.debug("Get price of item with id: %s", itemId);
-        return itemsService.getPrice(itemId);
+
+    @RequestMapping(value = "/get-price/{id}", method = RequestMethod.GET)
+    public BigDecimal getPrice(@PathVariable Long id) {
+        LOGGER.debug("Get price of item with id: %s", id);
+        return itemsService.getPrice(id);
     }
 }

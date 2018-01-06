@@ -32,12 +32,12 @@ public class ItemInMemoryRepository {
         repository.put(item3.getId(), item3);
     }
 
-    public Item getItem(long id) {
+    public Item getItem(Long id) {
         LOGGER.debug("Fetch item with id: %s", id);
         return repository.get(id);
     }
 
-    public BigDecimal getPrice(long id) {
+    public BigDecimal getPrice(Long id) {
         LOGGER.debug("Fetch price of item with id: %s", id);
         return repository.get(id).getPrice();
     }
