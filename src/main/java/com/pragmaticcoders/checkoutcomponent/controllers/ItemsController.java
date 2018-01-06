@@ -28,10 +28,15 @@ public class ItemsController {
         return itemsService.getItem(1L);
     }
 
-
     @RequestMapping(value = "/get-price/{id}", method = RequestMethod.GET)
     public BigDecimal getPrice(@PathVariable Long id) {
         LOGGER.debug("Get price of item with id: %s", id);
         return itemsService.getPrice(id);
+    }
+
+    @RequestMapping("/")
+    public String home()
+    {
+        return "Welcome!";
     }
 }

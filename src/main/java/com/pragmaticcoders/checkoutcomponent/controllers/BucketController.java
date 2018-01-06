@@ -25,7 +25,7 @@ public class BucketController {
 
     @RequestMapping(value = "/item/{itemId}", method = RequestMethod.GET)
     public BigDecimal scan(@PathVariable Long itemId) {
-        LOGGER.debug("Scan and add item with id: %s", itemId);
+        LOGGER.debug("Scan and add item with id: %s to bucket.", itemId);
         return bucketService.scan(itemId);
     }
 

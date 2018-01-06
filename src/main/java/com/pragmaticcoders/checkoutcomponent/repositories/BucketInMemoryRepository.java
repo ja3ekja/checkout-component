@@ -23,10 +23,12 @@ public class BucketInMemoryRepository {
     }
 
     public List<Item> getItems() {
+        LOGGER.debug("List items from bucket");
         return bucketRepository;
     }
 
     public void addItem(Item item) {
+        LOGGER.debug("Add item to bucket: %s", item);
         bucketRepository.add(item);
     }
 
@@ -35,6 +37,7 @@ public class BucketInMemoryRepository {
     }
 
     public BigDecimal getTotalAmount() {
+        LOGGER.debug("Get total amount of bucket");
         return bucketRepository.stream().map(Item::getPrice).reduce((price1, price2) -> price1.add(price2)).get();
     }
 

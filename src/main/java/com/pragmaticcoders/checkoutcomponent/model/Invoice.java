@@ -19,7 +19,7 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL)//fetch default LAZY
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Item> items;
     private BigDecimal totalPrice;
 
