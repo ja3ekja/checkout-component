@@ -1,5 +1,6 @@
 package com.pragmaticcoders.checkoutcomponent.services;
 
+import com.pragmaticcoders.checkoutcomponent.model.TransactionItem;
 import com.pragmaticcoders.checkoutcomponent.model.Item;
 import com.pragmaticcoders.checkoutcomponent.repositories.BucketInMemoryRepository;
 import com.pragmaticcoders.checkoutcomponent.repositories.ItemRepository;
@@ -10,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -20,15 +21,18 @@ public class BucketService {
 
     private final BucketInMemoryRepository bucketRepository;
     private final ItemRepository itemRepository;
+    private final BucketItemService bucketItemService;
 
 
     public BigDecimal scan(Long itemId) {
         LOGGER.debug("Scan and add item with id: %s to bucket.", itemId);
-        bucketRepository.addItem(getItemFromItemRepository(itemId));
+
+        TransactionItem transactionItem = bucketItemService.parse(getItemFromItemRepository(itemId));
+        bucketRepository.addItem(transactionItem);
         return getTotalAmount();
     }
 
-    public List<Item> getItems() {
+    public Set<TransactionItem> getItems() {
         LOGGER.debug("List items from bucket");
         return bucketRepository.getItems();
     }

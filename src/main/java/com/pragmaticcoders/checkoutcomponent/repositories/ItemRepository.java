@@ -1,6 +1,5 @@
 package com.pragmaticcoders.checkoutcomponent.repositories;
 
-
 import com.pragmaticcoders.checkoutcomponent.model.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 
