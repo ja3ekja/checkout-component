@@ -14,17 +14,17 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ItemRepositoryTest {
+public class ItemInMemoryRepositoryTest {
 
     @InjectMocks
-    private ItemRepository itemRepository;
+    private ItemInMemoryRepository itemInMemoryRepository;
 
     @Test
     public void getItemTest() {
         //Given
-        Item item1 = new Item(1L, "RAM memory", new BigDecimal(100.00), 20);
+        Item item1 = new Item(1L, "RAM memory", new BigDecimal(100.00));
         //When
-        Item resultItem = itemRepository.getItem(1L);
+        Item resultItem = itemInMemoryRepository.getItem(1L);
         //Then
         assertThat(resultItem, is(item1));
     }
@@ -33,17 +33,8 @@ public class ItemRepositoryTest {
     public void getPriceTest() {
         //Given
         //When
-        BigDecimal price = itemRepository.getPrice(2L);
+        BigDecimal price = itemInMemoryRepository.getPrice(2L);
         //Then
         assertThat(price, is(new BigDecimal(200.00)));
-    }
-
-    @Test
-    public void getQuantity() {
-        //Given
-        //When
-        int quantity = itemRepository.getQuantity(3L);
-        //Then
-        assertThat(quantity, is(50));
     }
 }

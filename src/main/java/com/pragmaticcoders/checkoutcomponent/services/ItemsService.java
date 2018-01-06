@@ -2,6 +2,7 @@ package com.pragmaticcoders.checkoutcomponent.services;
 
 import com.pragmaticcoders.checkoutcomponent.model.Item;
 import com.pragmaticcoders.checkoutcomponent.repositories.ItemRepository;
+import com.pragmaticcoders.checkoutcomponent.repositories.PriceOnly;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,20 +17,15 @@ public class ItemsService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemsService.class);
 
-    private final ItemRepository itemRepository;
+    private final ItemRepository repository;
 
-    public Item getItem(long id) {
+    public Item getItem(Long id) {
         LOGGER.debug("Select item with id: %s from repository", id);
-        return itemRepository.getItem(id);
+        return repository.findById(id);
     }
 
     public BigDecimal getPrice(Long id) {
         LOGGER.debug("Select price of item with id: %s from repository", id);
-        return itemRepository.getPrice(id);
-    }
-
-    public int getQuantity(Long id) {
-        LOGGER.debug("Select quantity of item with id: %s from repository", id);
-        return itemRepository.getQuantity(id);
+        return repository.getPriceById(id).getPrice();
     }
 }

@@ -2,7 +2,7 @@ package com.pragmaticcoders.checkoutcomponent.services;
 
 import com.pragmaticcoders.checkoutcomponent.model.Item;
 import com.pragmaticcoders.checkoutcomponent.repositories.BucketInMemoryRepository;
-import com.pragmaticcoders.checkoutcomponent.repositories.ItemRepository;
+import com.pragmaticcoders.checkoutcomponent.repositories.ItemInMemoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ public class BucketService {
     private static final Logger LOGGER = LoggerFactory.getLogger(BucketService.class);
 
     private final BucketInMemoryRepository bucketRepository;
-    private final ItemRepository itemRepository;
+    private final ItemInMemoryRepository itemInMemoryRepository;
 
 
     public BigDecimal scan(Long itemId) {
@@ -36,7 +36,7 @@ public class BucketService {
     }
 
     public Item getItemFromItemRepository(Long itemId) {
-        return itemRepository.getItem(itemId);
+        return itemInMemoryRepository.getItem(itemId);
     }
 }
 
