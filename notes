@@ -1,0 +1,1 @@
+command: mvn spring-boot:run
