@@ -2,6 +2,7 @@ package com.pragmaticcoders.checkoutcomponent.services;
 
 import com.pragmaticcoders.checkoutcomponent.exceptions.ItemNotExistException;
 import com.pragmaticcoders.checkoutcomponent.model.Item;
+import com.pragmaticcoders.checkoutcomponent.model.Promotion;
 import com.pragmaticcoders.checkoutcomponent.model.TransactionItem;
 import com.pragmaticcoders.checkoutcomponent.repositories.BucketInMemoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +23,14 @@ public class BucketService {
     private final BucketInMemoryRepository bucketRepository;
     private final ItemsService itemsService;
     private final BucketItemService bucketItemService;
+    private final PromotionService promotionService;
 
 
     public BigDecimal scanReturnTotalAmount(Long itemId) throws ItemNotExistException {
         LOGGER.debug("Scan and add item with id: %s to bucket.", itemId);
         TransactionItem transactionItem = bucketItemService.parse(getItemFromItemRepository(itemId));
         bucketRepository.addItem(transactionItem);
+        promotionService.calculatePromotion(itemId);
         return getTotalAmount();
     }
 
