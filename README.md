@@ -74,11 +74,28 @@ Example of platform independent market checkout component application.
  [http://localhost:8080/receipt/create-receipt](http://localhost:8080/receipt/create-receipt)
  
  Continue shopping with new bucket. During shopping could open other browser or incognito mode for new session and do shopping parallely.
+
+##Tests
+* There is few of unit and integration tests
+
+```
+$ docker-compose up tests
+```
+
  
 ## Docker troubleshooting 
 
 * Docker -> Preferences -> File Sharing -> {share app folder}
 * Docker -> Preferences -> Advanced -> {move the memory indicator to 4 GB or more}
 * Delete env var if overrides declared in docker-compose.yml file
-* Release 8080 and 1433 ports if occupied  
+* Release 8080 and 1433 ports if occupied 
+
+## To run app in Intellij
+* import project
+* change db->localhost in CheckoutComponentApplication.java and application.properties
+* provision db from docker-compose
+```
+$ docker-compose up db
+``` 
+* run application in Intellij
  

@@ -19,3 +19,14 @@ services:
       - "8080:8080"
     depends_on:
       - db
+
+  tests:
+    image: ja3ekja/maven:version2.0
+    command: mvn test
+    volumes:
+      - "./:/usr/src/mymaven"
+      - "~/.m2:/root/.m2"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db

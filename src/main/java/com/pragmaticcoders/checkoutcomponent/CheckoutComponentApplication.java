@@ -13,7 +13,7 @@ public class CheckoutComponentApplication {
     public static void main(String[] args) throws SQLException {
         SpringApplication.run(CheckoutComponentApplication.class, args);
 
-        String dbURL = "jdbc:sqlserver://localhost:1433;user=sa;password=RybaPila1!PiesJadl";
+        String dbURL = "jdbc:sqlserver://db:1433;user=sa;password=RybaPila1!PiesJadl";
 
         Connection conn = DriverManager.getConnection(dbURL);
         if (conn != null) {
