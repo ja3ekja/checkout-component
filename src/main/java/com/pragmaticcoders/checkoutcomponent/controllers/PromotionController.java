@@ -37,7 +37,7 @@ public class PromotionController {
         return promotionService.getPromotion(promotionId);
     }
 
-    @RequestMapping(value = "/get-all-promotion/", method = RequestMethod.GET)
+    @RequestMapping(value = "/get-all-promotion", method = RequestMethod.GET)
     public List<Promotion> getAllPromotions() {
         LOGGER.debug("Get all promotion");
         return promotionService.getAllPromotions();
@@ -46,6 +46,6 @@ public class PromotionController {
     @RequestMapping(value = "/get-promotion/itemId/{itemId}", method = RequestMethod.GET)
     public Promotion getPromotionByItem(@PathVariable Long itemId) throws PromotionNotExistException {
         LOGGER.debug("Get promotion for item : " + itemId);
-        return promotionService.getPromotionByItemId(itemId);
+        return promotionService.getPromotionByItemIdWithValidation(itemId);
     }
 }

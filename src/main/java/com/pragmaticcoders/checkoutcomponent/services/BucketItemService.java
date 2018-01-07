@@ -20,11 +20,11 @@ public class BucketItemService {
     private final BucketInMemoryRepository bucketRepository;
 
     TransactionItem parse(Long itemId, String name, BigDecimal price) {
+        LOGGER.debug("Parse item with id: %s to bucket item.", itemId);
         return new TransactionItem(itemId, name, price);
-
     }
 
-    public TransactionItem convertAndAddItem(Long itemId, String name, BigDecimal price) {
+    TransactionItem convertAndAddItem(Long itemId, String name, BigDecimal price) {
         LOGGER.debug("Covert and add item with id: %s to bucket.", itemId);
         TransactionItem transactionItem = parse(itemId, name, price);
         bucketRepository.addItem(transactionItem);

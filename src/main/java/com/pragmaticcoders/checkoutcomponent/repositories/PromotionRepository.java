@@ -11,7 +11,7 @@ public interface PromotionRepository extends JpaRepository<Promotion, Long> {
 
     Optional<Promotion> findById(Long id);
 
-    Promotion findByItem(Item item);
+    Optional<Promotion> findByItem(Item item);
 
     Promotion save(Promotion promotion);
 
