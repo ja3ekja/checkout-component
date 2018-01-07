@@ -18,7 +18,7 @@ Example of platform independent market checkout component application.
 * Lombok
 
 ## Git
-* No code commits to master
+* Almost no code commits to master (only documents)
 * Each sprint had its own branch
 * Pull request
 * Squash and merge for better history
@@ -40,11 +40,11 @@ Example of platform independent market checkout component application.
 * JpaRepository (projection)
 * In memory Bucket
 * Bucket bases on browser session (@SessionScope)
-* Flow controllers -> services -=> repositories
+* Flow: controllers -> services -> repositories
 * Initialized data by data.sql file
 * Docker container with separate services for db and backend
 * Backend bases on my private backed image stored on [hub.docker.com](https://hub.docker.com/r/ja3ekja/maven/)
-* @OneToOne & @OneToMany one directional and default fetch type
+* @OneToOne and @OneToMany one directional and default fetch type
 * @Transactional for create receipt 
 * @ControllerAdvice for handle exception from controllers
 * @SessionScope and in memory implementation of bucket
@@ -62,8 +62,11 @@ Example of platform independent market checkout component application.
  [http://localhost:8080/bucket/scan-item/1](http://localhost:8080/bucket/scan-item/1)
  [http://localhost:8080/bucket/scan-item/1](http://localhost:8080/bucket/scan-item/1)
  [http://localhost:8080/bucket/scan-item/1](http://localhost:8080/bucket/scan-item/1)
+ 
  amount | quantity | item_id
-  10.00	      3	       1
+ <br>
+ &nbsp; 10.00	&nbsp;|&nbsp;  &nbsp;&nbsp;&nbsp;   3	 &nbsp;&nbsp;&nbsp;&nbsp;  |   &nbsp;&nbsp;&nbsp; 1
+  
  Basing on promotion row, after third added item, additional row will be added with deducted negative value.
  [http://localhost:8080/bucket/check](http://localhost:8080/bucket/check)
  Add another items, i. e. seven bars with id 9.
