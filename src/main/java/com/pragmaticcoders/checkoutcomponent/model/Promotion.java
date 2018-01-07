@@ -21,9 +21,9 @@ public class Promotion {
     @OneToOne(cascade = CascadeType.ALL)
     private Item item;
 
-    public Promotion(Item item, Integer quantity, BigDecimal price) {
-        this.item = item;
-        this.quantity = quantity;
+    public Promotion(BigDecimal price, Integer quantity, Item item) {
         this.price = price;
+        this.quantity = quantity;
+        this.item = item;
     }
 }

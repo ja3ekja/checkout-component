@@ -20,17 +20,13 @@ public class PromotionServiceTest {
     @Test
     public void getPromotionForItemTest() {
         //Given
-        Promotion promotionMock = new Promotion(new Item(), 2, new BigDecimal(5.00));
         //when
-        Promotion promotion = promotionService.getPromotionForItem(3L);
         //then
     }
 
     @Test
     public void getAllPromotionsTest() {
         //Given
-        Promotion promotion1 = new Promotion(new Item(), 2, new BigDecimal(5.00));
-        Promotion promotion2 = new Promotion(new Item(), 2, new BigDecimal(5.00));
         //when
         //then
     }
