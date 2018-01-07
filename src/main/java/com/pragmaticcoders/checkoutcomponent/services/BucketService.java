@@ -30,7 +30,7 @@ public class BucketService {
         LOGGER.debug("Scan and add item with id: %s to bucket.", itemId);
         Item item = getItemFromItemRepository(itemId);
         TransactionItem transItem = bucketItemService.convertAndAddItem(item.getId(), item.getName(),item.getPrice());
-        promotionService.calculatePromotion(transItem, itemId, getItems());
+        if (!(promotionService.getPromotionByItemId(itemId) == null)) promotionService.calculatePromotion(transItem, itemId, getItems());
         return getTotalAmount();
     }
 

@@ -65,8 +65,8 @@ public class PromotionService {
         BigDecimal promotionItemsNumber = extractPromotionFromBucketForItemId(itemId, bucketItems);
         BigDecimal binaryFlag = flagIfShouldAddPromotionDeduction(promotion, itemsNumberWithoutPromotion, promotionItemsNumber);
         BigDecimal promotionAmount = calculatePromotionAmount(transactionItem, promotion);
-        if (!binaryFlag.equals(ZERO))
-            bucketItemService.convertAndAddItem(itemId, PROMOTION_NAME, promotionAmount);
+
+        if (!binaryFlag.equals(ZERO)) bucketItemService.convertAndAddItem(itemId, PROMOTION_NAME, promotionAmount);
     }
 
     private BigDecimal flagIfShouldAddPromotionDeduction(Promotion promotion, BigDecimal itemsNumberWithoutPromotion, BigDecimal promotionItemsNumber) {
