@@ -23,6 +23,7 @@ public class PromotionService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PromotionService.class);
     private final static String PROMOTION_NAME = "promotion";
+    private final static BigDecimal ZERO = BigDecimal.ZERO;
     private final PromotionRepository promotionRepository;
 
     private final ItemsService itemsService;
@@ -53,17 +54,18 @@ public class PromotionService {
         return promotionRepository.findAll();
     }
 
+    /*
+     * pattern = ( ( itemsNumber / promotionQuantity ) - promotionItemsNumber ) * ( promotionAmount - ( itemPrice *  ))
+     * this ( itemsNumberWithoutPromotion / PromotionQuantity ) is rounded down
+     */
     public void calculatePromotion(TransactionItem transactionItem, Long itemId, Set<TransactionItem> bucketItems) {
-        /*
-         * pattern = ( ( itemsNumber / promotionQuantity ) - promotionItemsNumber ) * ( promotionAmount - ( itemPrice *  ))
-         * this ( itemsNumberWithoutPromotion / PromotionQuantity ) is rounded down
-         */
+
         Promotion promotion = getPromotionByItemId(itemId);
         BigDecimal itemsNumberWithoutPromotion = extractBucketItemForItemId(itemId, bucketItems);
         BigDecimal promotionItemsNumber = extractPromotionFromBucketForItemId(itemId, bucketItems);
         BigDecimal binaryFlag = flagIfShouldAddPromotionDeduction(promotion, itemsNumberWithoutPromotion, promotionItemsNumber);
-        BigDecimal promotionAmount = calculatePromotionAmount(transactionItem, promotion, binaryFlag);
-        if (!binaryFlag.equals(new BigDecimal(0)))
+        BigDecimal promotionAmount = calculatePromotionAmount(transactionItem, promotion);
+        if (!binaryFlag.equals(ZERO))
             bucketItemService.convertAndAddItem(itemId, PROMOTION_NAME, promotionAmount);
     }
 
@@ -72,9 +74,9 @@ public class PromotionService {
                 .divide(new BigDecimal(promotion.getQuantity()), 0, RoundingMode.DOWN).subtract(promotionItemsNumber);
     }
 
-    private BigDecimal calculatePromotionAmount(TransactionItem transactionItem, Promotion promotion, BigDecimal count) {
+    private BigDecimal calculatePromotionAmount(TransactionItem transactionItem, Promotion promotion) {
         return promotion.getAmount()
-                .subtract(transactionItem.getPrice().multiply(new BigDecimal(promotion.getQuantity()))).multiply(count);
+                .subtract(transactionItem.getPrice().multiply(new BigDecimal(promotion.getQuantity())));
     }
 
     private BigDecimal extractPromotionFromBucketForItemId(Long itemId, Set<TransactionItem> bucketItems) {
