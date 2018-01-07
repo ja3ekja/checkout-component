@@ -25,9 +25,7 @@ public class BucketInMemoryRepositoryTest {
     private BucketInMemoryRepository bucketRepository;
 
     private TransactionItem item1;
-
     private Set<TransactionItem> bucketSet;
-
     private UUID uuid;
 
     @Before
@@ -57,12 +55,12 @@ public class BucketInMemoryRepositoryTest {
     @Test
     public void addItemTest() throws Exception {
         //Given
-        Set<TransactionItem> twoItemsSet = bucketSet;
-        twoItemsSet.add(item1);
+        Set<TransactionItem> mockedTwoItemsSet = bucketSet;
+        mockedTwoItemsSet.add(item1);
         //When
         bucketRepository.addItem(item1);
         //Then
-        assertThat(bucketRepository.getItems(), is(twoItemsSet));
+        assertThat(bucketRepository.getItems(), is(mockedTwoItemsSet));
     }
 
     @Test

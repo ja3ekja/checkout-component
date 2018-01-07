@@ -24,9 +24,8 @@ public class BucketService {
     private final BucketItemService bucketItemService;
 
 
-    public BigDecimal scan(Long itemId) throws ItemNotExistException {
+    public BigDecimal scanReturnTotalAmount(Long itemId) throws ItemNotExistException {
         LOGGER.debug("Scan and add item with id: %s to bucket.", itemId);
-
         TransactionItem transactionItem = bucketItemService.parse(getItemFromItemRepository(itemId));
         bucketRepository.addItem(transactionItem);
         return getTotalAmount();
