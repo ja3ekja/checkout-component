@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
@@ -18,5 +19,6 @@ public class Stock {
     private Long id;
     @OneToOne(cascade = CascadeType.ALL)
     private Item item;
+    @NotNull
     private int quantity;
 }

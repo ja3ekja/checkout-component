@@ -1,5 +1,6 @@
 package com.pragmaticcoders.checkoutcomponent.services;
 
+import com.pragmaticcoders.checkoutcomponent.exceptions.ItemNotExistException;
 import com.pragmaticcoders.checkoutcomponent.model.Item;
 import com.pragmaticcoders.checkoutcomponent.repositories.ItemRepository;
 import com.pragmaticcoders.checkoutcomponent.repositories.PriceOnly;
@@ -19,13 +20,19 @@ public class ItemsService {
 
     private final ItemRepository repository;
 
-    public Item getItem(Long id) {
+    public Item getItem(Long id) throws ItemNotExistException {
         LOGGER.debug("Select item with id: %s from repository", id);
-        return repository.findById(id);
+        return repository.findById(id).orElseThrow(() -> new ItemNotExistException("Item not exist."));
     }
 
-    public BigDecimal getPrice(Long id) {
+    public BigDecimal getPrice(Long id) throws ItemNotExistException {
         LOGGER.debug("Select price of item with id: %s from repository", id);
-        return repository.getPriceById(id).getPrice();
+        PriceOnly priceOnly = repository.getPriceById(id).orElseThrow(() -> new ItemNotExistException("Item not exist."));
+        return priceOnly.getPrice();
+    }
+
+    public Item saveItem(Item item) {
+        LOGGER.debug("Add Item" + item + "to repository");
+        return repository.save(item);
     }
 }

@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table
 public class Item {
 
     @Id
@@ -20,12 +20,17 @@ public class Item {
     private String name;
     private BigDecimal price;
 
+    public Item(String name, BigDecimal price) {
+        this.name = name;
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Item)) return false;
         Item item = (Item) o;
-        return getId() == item.getId() && getName().equals(item.getName());
+        return Objects.equals(getId(), item.getId()) && getName().equals(item.getName());
     }
 
     @Override
