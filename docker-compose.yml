@@ -10,11 +10,11 @@ services:
       - "1433:1433"
 
   backend:
-    image: ja3ekja/maven
+    image: ja3ekja/maven:version2.0
     command: mvn spring-boot:run
     volumes:
       - "./:/usr/src/mymaven"
-      - "~/.m2:/usr/src/mymaven/.m2"
+      - "~/.m2:/root/.m2"
     ports:
       - "8080:8080"
     depends_on:

@@ -25,9 +25,9 @@ public class BucketController {
     private final BucketService bucketService;
 
     @RequestMapping(value = "/scan-item/{itemId}", method = RequestMethod.GET)
-    public BigDecimal scan(@PathVariable Long itemId) throws ItemNotExistException {
+    public BigDecimal scanReturnTotalAmount(@PathVariable Long itemId) throws ItemNotExistException {
         LOGGER.debug("Scan and add item with id: %s to bucket.", itemId);
-        return bucketService.scan(itemId);
+        return bucketService.scanReturnTotalAmount(itemId);
     }
 
     @RequestMapping(value = "/check", method = RequestMethod.GET)

@@ -21,8 +21,8 @@ public class ReceiptService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ReceiptService.class);
 
     private final ReceiptRepository receiptRepository;
-
     private final BucketInMemoryRepository bucketRepository;
+    private final PaymentServiceMock paymentService;
 
     public Receipt getReceipt(Long id) throws ReceiptNotExistException {
         return receiptRepository.findById(id).orElseThrow(() -> new ReceiptNotExistException("Receipt not exist."));
@@ -32,6 +32,8 @@ public class ReceiptService {
     public Receipt createAndSaveAndClean() {
         Receipt receipt = create();
         LOGGER.debug("Receipt created");
+        paymentService.payForReceiptMock();
+        LOGGER.debug("Successful payment");
         receiptRepository.save(receipt);
         LOGGER.debug("Receipt saved");
         bucketRepository.clearBucket();

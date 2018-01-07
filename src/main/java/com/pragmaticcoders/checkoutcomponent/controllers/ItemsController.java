@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@RequestMapping("/checkout")
+@RequestMapping("/item")
 public class ItemsController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemsController.class);
@@ -32,13 +32,13 @@ public class ItemsController {
 
     @RequestMapping(value = "/get-price/{id}", method = RequestMethod.GET)
     public BigDecimal getPrice(@PathVariable Long id) throws ItemNotExistException {
-        LOGGER.debug("Get price of item with id: %s", id);
+        LOGGER.debug("Get amount of item with id: %s", id);
         return itemsService.getPrice(id);
     }
 
     @RequestMapping(value = "/add-item/name/{name}/price/{price}", method = RequestMethod.GET)
     public Item addItem(@PathVariable String name, @PathVariable BigDecimal price) {
-        LOGGER.debug("Add item "+ name + " name, price "+price);
+        LOGGER.debug("Add item "+ name + " name, amount "+price);
         return itemsService.saveItem(new Item(name,price));
     }
 

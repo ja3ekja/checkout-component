@@ -1,6 +1,7 @@
 package com.pragmaticcoders.checkoutcomponent.controllers;
 
 import com.pragmaticcoders.checkoutcomponent.exceptions.ItemNotExistException;
+import com.pragmaticcoders.checkoutcomponent.exceptions.PromotionNotExistException;
 import com.pragmaticcoders.checkoutcomponent.exceptions.ReceiptNotExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,15 +31,21 @@ public class ExceptionController {
         return error(e, HttpStatus.NOT_FOUND, e.getMessage());
     }
 
+    @ExceptionHandler(PromotionNotExistException.class)
+    public ResponseEntity<VndErrors> receiptNotFoundException(final PromotionNotExistException e) {
+        LOGGER.debug("Promotion controller Exception: " + e.getMessage());
+        return error(e, HttpStatus.NOT_FOUND, e.getMessage());
+    }
+
     private ResponseEntity<VndErrors> error(final Exception exception, final HttpStatus httpStatus, final String logRef) {
         final String message = Optional.of(exception.getMessage()).orElse(exception.getClass().getSimpleName());
         return new ResponseEntity<>(new VndErrors(logRef, message), httpStatus);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<VndErrors> apiException(final ItemNotExistException e) {
-        LOGGER.debug("Api exception: "+e.getMessage());
-        return error(e, HttpStatus.NOT_FOUND, "Api exception: "+e.getMessage());
+    public ResponseEntity<VndErrors> apiException(final Exception e) {
+        LOGGER.debug("Api exception: " + e.getMessage());
+        return error(e, HttpStatus.NOT_FOUND, "Api exception: " + e.getMessage());
     }
 
 }

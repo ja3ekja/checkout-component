@@ -2,6 +2,7 @@ package com.pragmaticcoders.checkoutcomponent.services;
 
 import com.pragmaticcoders.checkoutcomponent.exceptions.ItemNotExistException;
 import com.pragmaticcoders.checkoutcomponent.model.Item;
+import com.pragmaticcoders.checkoutcomponent.model.Promotion;
 import com.pragmaticcoders.checkoutcomponent.model.TransactionItem;
 import com.pragmaticcoders.checkoutcomponent.repositories.BucketInMemoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,13 +23,18 @@ public class BucketService {
     private final BucketInMemoryRepository bucketRepository;
     private final ItemsService itemsService;
     private final BucketItemService bucketItemService;
+    private final PromotionService promotionService;
 
 
-    public BigDecimal scan(Long itemId) throws ItemNotExistException {
+    public BigDecimal scanReturnTotalAmount(Long itemId) throws ItemNotExistException {
         LOGGER.debug("Scan and add item with id: %s to bucket.", itemId);
+        Item item = getItemFromItemRepository(itemId);
+        LOGGER.debug("Convert item with id: %s to bucket item.", itemId);
+        TransactionItem transItem = bucketItemService.convertAndAddItem(itemId, item.getName(),item.getPrice());
 
-        TransactionItem transactionItem = bucketItemService.parse(getItemFromItemRepository(itemId));
-        bucketRepository.addItem(transactionItem);
+        LOGGER.debug("Calculate promotion deduction forid: %s to bucket item.", itemId);
+        if ( promotionService.getPromotionByItemId(itemId).isPresent() )
+            promotionService.calculatePromotion(transItem, itemId, getItems());
         return getTotalAmount();
     }
 
@@ -52,5 +58,6 @@ public class BucketService {
         bucketRepository.clearBucket();
         return bucketRepository.getTotalAmount();
     }
+
 }
 

@@ -9,7 +9,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     Optional<Item> findById(Long id);
 
-
     Optional<PriceOnly> getPriceById(Long id);
 
     Item save(Item item);

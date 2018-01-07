@@ -22,4 +22,11 @@ public class TransactionItem {
     private Long itemId;
     private String name;
     private BigDecimal price;
+
+    public TransactionItem(Long itemId, String name, BigDecimal price) {
+        this.uuid = UUID.randomUUID();
+        this.itemId = itemId;
+        this.name = name;
+        this.price = price;
+    }
 }

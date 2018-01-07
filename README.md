@@ -47,6 +47,7 @@ Example of platform independent market checkout component application.
 * @OneToOne & @OneToMany one directional and default fetch type
 * @Transactional for create receipt 
 * @ControllerAdvice for handle exception from controllers
+* @SessionScope and in memory implementation of bucket
 
 
 
@@ -58,7 +59,21 @@ Example of platform independent market checkout component application.
  $ cd checkout-component
  $ docker-compose up backend
  ```
- [http://localhost:8080/checkout/get-item/1](http://localhost:8080/checkout/get-item/1)
+ [http://localhost:8080/bucket/scan-item/1](http://localhost:8080/bucket/scan-item/1)
+ [http://localhost:8080/bucket/scan-item/1](http://localhost:8080/bucket/scan-item/1)
+ [http://localhost:8080/bucket/scan-item/1](http://localhost:8080/bucket/scan-item/1)
+ amount | quantity | item_id
+  10.00	      3	       1
+ Basing on promotion row, after third added item, additional row will be added with deducted negative value.
+ [http://localhost:8080/bucket/check](http://localhost:8080/bucket/check)
+ Add another items, i. e. seven bars with id 9.
+ [http://localhost:8080/bucket/scan-item/9](http://localhost:8080/bucket/scan-item/9)
+ ...
+ [http://localhost:8080/bucket/scan-item/9](http://localhost:8080/bucket/scan-item/9)
+ Print receipt
+ [http://localhost:8080/receipt/create-receipt](http://localhost:8080/receipt/create-receipt)
+ 
+ Continue shopping with new bucket. During shopping could open other browser or incognito mode for new session and do shopping parallely.
  
 ## Docker troubleshooting 
 
