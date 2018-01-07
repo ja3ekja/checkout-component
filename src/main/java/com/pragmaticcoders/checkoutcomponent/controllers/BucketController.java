@@ -1,5 +1,6 @@
 package com.pragmaticcoders.checkoutcomponent.controllers;
 
+import com.pragmaticcoders.checkoutcomponent.exceptions.ItemNotExistException;
 import com.pragmaticcoders.checkoutcomponent.model.TransactionItem;
 import com.pragmaticcoders.checkoutcomponent.services.BucketService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class BucketController {
     private final BucketService bucketService;
 
     @RequestMapping(value = "/scan-item/{itemId}", method = RequestMethod.GET)
-    public BigDecimal scan(@PathVariable Long itemId) {
+    public BigDecimal scan(@PathVariable Long itemId) throws ItemNotExistException {
         LOGGER.debug("Scan and add item with id: %s to bucket.", itemId);
         return bucketService.scan(itemId);
     }
@@ -36,8 +37,14 @@ public class BucketController {
     }
 
     @RequestMapping(value = "/sum", method = RequestMethod.GET)
-    public BigDecimal bucketSum() {
+    public BigDecimal bucketTotalAmount() {
         LOGGER.debug("Get total amount of bucket");
         return bucketService.getTotalAmount();
+    }
+
+    @RequestMapping(value = "/clean", method = RequestMethod.GET)
+    public BigDecimal cleanBucket() {
+        LOGGER.debug("Clean bucket");
+        return bucketService.cleanBucket();
     }
 }

@@ -44,7 +44,10 @@ Example of platform independent market checkout component application.
 * Initialized data by data.sql file
 * Docker container with separate services for db and backend
 * Backend bases on my private backed image stored on [hub.docker.com](https://hub.docker.com/r/ja3ekja/maven/)
-* @OneToOne & @OneToMany one directional and default fetch type 
+* @OneToOne & @OneToMany one directional and default fetch type
+* @Transactional for create receipt 
+* @ControllerAdvice for handle exception from controllers
+
 
 
 ## How to run

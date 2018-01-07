@@ -1,13 +1,15 @@
 package com.pragmaticcoders.checkoutcomponent.repositories;
 
-import com.pragmaticcoders.checkoutcomponent.model.Item;
 import com.pragmaticcoders.checkoutcomponent.model.Receipt;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.web.context.annotation.SessionScope;
+
+import java.util.Optional;
 
 public interface ReceiptRepository extends JpaRepository<Receipt, Long> {
 
-    Receipt findByName(String name);
+    Optional<Receipt> findByName(String name);
+
+    Optional<Receipt> findById(Long id);
 
     Receipt save(Receipt receipt);
 }

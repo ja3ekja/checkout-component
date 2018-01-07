@@ -1,5 +1,6 @@
 package com.pragmaticcoders.checkoutcomponent.services;
 
+import com.pragmaticcoders.checkoutcomponent.exceptions.ReceiptNotExistException;
 import com.pragmaticcoders.checkoutcomponent.model.Receipt;
 import com.pragmaticcoders.checkoutcomponent.repositories.BucketInMemoryRepository;
 import com.pragmaticcoders.checkoutcomponent.repositories.ReceiptRepository;
@@ -9,35 +10,46 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ReceiptService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ItemsService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReceiptService.class);
 
     private final ReceiptRepository receiptRepository;
 
     private final BucketInMemoryRepository bucketRepository;
 
-    public Receipt getReceipt(String receiptName) {
-        return receiptRepository.findByName(receiptName);
+    public Receipt getReceipt(Long id) throws ReceiptNotExistException {
+        return receiptRepository.findById(id).orElseThrow(() -> new ReceiptNotExistException("Receipt not exist."));
     }
 
-    public Receipt createAndSave() {
+    @Transactional
+    public Receipt createAndSaveAndClean() {
         Receipt receipt = create();
-        return receiptRepository.save(receipt);
+        LOGGER.debug("Receipt created");
+        receiptRepository.save(receipt);
+        LOGGER.debug("Receipt saved");
+        bucketRepository.clearBucket();
+        LOGGER.debug("Receipt cleaned");
+        return receipt;
     }
 
-    public Receipt create() {
+    private Receipt create() {
         Receipt receipt = new Receipt();
-        receipt.setName("FV/" + receipt.getId() + "/2018");
-        receipt.setDate(new Date());
+        receipt.setName("FV-" + generateReceiptId() + "-2018");
+        receipt.setDate(LocalDateTime.now());
         receipt.setTransactionItems(bucketRepository.getItems());
         receipt.setTotalPrice(bucketRepository.getTotalAmount());
 
         return receipt;
+    }
+
+    private int generateReceiptId() {
+        return (int) (10000 * Math.random());
     }
 }

@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -17,7 +17,8 @@ public class Receipt {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private Date date;
+    @Column
+    private LocalDateTime date;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<TransactionItem> transactionItems;
     private BigDecimal totalPrice;
@@ -31,8 +32,7 @@ public class Receipt {
 
         Receipt receipt = (Receipt) o;
 
-        if (!getId().equals(receipt.getId())) return false;
-        return getName().equals(receipt.getName());
+        return getId().equals(receipt.getId()) && getName().equals(receipt.getName());
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.pragmaticcoders.checkoutcomponent.services;
 
-import com.pragmaticcoders.checkoutcomponent.model.TransactionItem;
+import com.pragmaticcoders.checkoutcomponent.exceptions.ItemNotExistException;
 import com.pragmaticcoders.checkoutcomponent.model.Item;
+import com.pragmaticcoders.checkoutcomponent.model.TransactionItem;
 import com.pragmaticcoders.checkoutcomponent.repositories.BucketInMemoryRepository;
-import com.pragmaticcoders.checkoutcomponent.repositories.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +20,11 @@ public class BucketService {
     private static final Logger LOGGER = LoggerFactory.getLogger(BucketService.class);
 
     private final BucketInMemoryRepository bucketRepository;
-    private final ItemRepository itemRepository;
+    private final ItemsService itemsService;
     private final BucketItemService bucketItemService;
 
 
-    public BigDecimal scan(Long itemId) {
+    public BigDecimal scan(Long itemId) throws ItemNotExistException {
         LOGGER.debug("Scan and add item with id: %s to bucket.", itemId);
 
         TransactionItem transactionItem = bucketItemService.parse(getItemFromItemRepository(itemId));
@@ -42,9 +42,15 @@ public class BucketService {
         return bucketRepository.getTotalAmount();
     }
 
-    public Item getItemFromItemRepository(Long itemId) {
+    private Item getItemFromItemRepository(Long itemId) throws ItemNotExistException {
         LOGGER.debug("Get item : %s", itemId);
-        return itemRepository.findById(itemId);
+        return itemsService.getItem(itemId);
+    }
+
+    public BigDecimal cleanBucket() {
+        LOGGER.debug("Get item : %s");
+        bucketRepository.clearBucket();
+        return bucketRepository.getTotalAmount();
     }
 }
 
