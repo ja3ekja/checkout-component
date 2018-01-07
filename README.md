@@ -58,7 +58,7 @@ Example of platform independent market checkout component application.
  $ cd checkout-component
  $ docker-compose up backend
  ```
- [http://localhost:8080/checkout/get-item/1](http://localhost:8080/checkout/get-item/1)
+ [http://localhost:8080/bucket/scan-item/1](http://localhost:8080/bucket/scan-item/1)
  
 ## Docker troubleshooting 
 
