@@ -16,13 +16,13 @@ public class Promotion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private BigDecimal price;
+    private BigDecimal amount;
     private Integer quantity;
     @OneToOne(cascade = CascadeType.ALL)
     private Item item;
 
-    public Promotion(BigDecimal price, Integer quantity, Item item) {
-        this.price = price;
+    public Promotion(BigDecimal amount, Integer quantity, Item item) {
+        this.amount = amount;
         this.quantity = quantity;
         this.item = item;
     }

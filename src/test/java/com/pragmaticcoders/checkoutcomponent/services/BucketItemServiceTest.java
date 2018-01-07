@@ -29,7 +29,7 @@ public class BucketItemServiceTest {
         long id = 10L;
         Item item = new Item(id, szprotki, price);
         //When
-        TransactionItem transactionItem = bucketItemService.parse(item);
+        TransactionItem transactionItem = bucketItemService.parse(item.getId(), item.getName(),item.getPrice());
         //Them
         assertThat(transactionItem.getItemId(), is(id));
         assertThat(transactionItem.getName(), is(szprotki));

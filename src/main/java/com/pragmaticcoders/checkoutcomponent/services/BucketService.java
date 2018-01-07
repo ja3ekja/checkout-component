@@ -28,9 +28,9 @@ public class BucketService {
 
     public BigDecimal scanReturnTotalAmount(Long itemId) throws ItemNotExistException {
         LOGGER.debug("Scan and add item with id: %s to bucket.", itemId);
-        TransactionItem transactionItem = bucketItemService.parse(getItemFromItemRepository(itemId));
-        bucketRepository.addItem(transactionItem);
-        promotionService.calculatePromotion(itemId);
+        Item item = getItemFromItemRepository(itemId);
+        TransactionItem transItem = bucketItemService.convertAndAddItem(item.getId(), item.getName(),item.getPrice());
+        promotionService.calculatePromotion(transItem, itemId, getItems());
         return getTotalAmount();
     }
 
@@ -54,5 +54,6 @@ public class BucketService {
         bucketRepository.clearBucket();
         return bucketRepository.getTotalAmount();
     }
+
 }
 

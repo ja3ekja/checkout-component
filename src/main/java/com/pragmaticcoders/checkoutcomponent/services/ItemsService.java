@@ -26,7 +26,7 @@ public class ItemsService {
     }
 
     public BigDecimal getPrice(Long id) throws ItemNotExistException {
-        LOGGER.debug("Select price of item with id: %s from repository", id);
+        LOGGER.debug("Select amount of item with id: %s from repository", id);
         PriceOnly priceOnly = repository.getPriceById(id).orElseThrow(() -> new ItemNotExistException("Item not exist."));
         return priceOnly.getPrice();
     }

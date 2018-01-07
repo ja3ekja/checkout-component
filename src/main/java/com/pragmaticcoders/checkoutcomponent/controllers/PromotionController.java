@@ -27,7 +27,7 @@ public class PromotionController {
 
     @RequestMapping(value = "/add-promotion/price/{price}/quantity/{quantity}/item-id/{id}", method = RequestMethod.GET)
     public Promotion addPromotion(@PathVariable BigDecimal price, @PathVariable Integer quantity, @PathVariable Long id) throws ItemNotExistException {
-        LOGGER.debug("Add promotion for product id: " + id + " price " + price + " for quantity " + quantity);
+        LOGGER.debug("Add promotion for product id: " + id + " amount " + price + " for quantity " + quantity);
         return promotionService.savePromotion(price, quantity, id);
     }
 
@@ -46,6 +46,6 @@ public class PromotionController {
     @RequestMapping(value = "/get-promotion/itemId/{itemId}", method = RequestMethod.GET)
     public Promotion getPromotionByItem(@PathVariable Long itemId) throws PromotionNotExistException {
         LOGGER.debug("Get promotion for item : " + itemId);
-        return promotionService.getPromotionById(itemId);
+        return promotionService.getPromotionByItemId(itemId);
     }
 }
