@@ -92,6 +92,7 @@ $ docker-compose up tests
 * Docker -> Preferences -> Advanced -> {move the memory indicator to 4 GB or more}
 * Delete env var if overrides declared in docker-compose.yml file
 * Release 8080 and 1433 ports if occupied 
+* If you are using Doecker Tollbox use 192.168.99.100 instead of localhost
 
 ## To run app in Intellij
 * import project
